@@ -12,3 +12,22 @@ workbox.routing.registerRoute(
   /\.js$/,
   new workbox.strategies.NetworkFirst()
 );
+
+workbox.routing.registerRoute('https://fonts.googleapis.com/(.*)',
+  workbox.strategies.cacheFirst({
+    cacheName: 'googleapis',
+    cacheExpiration: {
+      maxEntries: 20
+    },
+    cacheableResponse: {statuses: [0, 200]}
+  })
+);
+
+workbox.routing.registerRoute(/\.(?:png|gif|jpg)$/,
+  workbox.strategies.cacheFirst({
+    cacheName: 'images-cache',
+    cacheExpiration: {
+      maxEntries: 50
+    }
+  })
+);

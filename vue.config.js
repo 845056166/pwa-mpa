@@ -53,6 +53,18 @@ module.exports = {
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
       swSrc: 'public/service-worker.js',
+      // globDirectory: 'build/',
+      globPatterns: [
+        '**/*.css',
+        'home.html',
+      ],
+      // swDest: 'build/sw.js',
+      globIgnores: [
+        // '../workbox-cli-config.js'
+      ],
+      templatedUrls: {
+        // '/': ['index.html']
+      }
       // ...other Workbox options...
     }
   }
