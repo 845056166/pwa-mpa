@@ -53,6 +53,7 @@ module.exports = {
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
       swSrc: 'public/service-worker.js',
+      // 指定查找文件的位置
       // globDirectory: 'build/',
       globPatterns: [
         '**/*.css',

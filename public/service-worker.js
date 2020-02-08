@@ -31,3 +31,21 @@ workbox.routing.registerRoute(/\.(?:png|gif|jpg)$/,
     }
   })
 );
+
+var articleHandler = workbox.strategies.NetworkFirst({
+  cacheName: 'posts-cache',
+  cacheExpiration: {
+    maxEntries: 50
+  }
+});
+
+workbox.routing.registerRoute('/pages/post*.html', args => {
+  return articleHandler.handle(args).then(response => {
+    if (!response) {
+      return caches.match('pages/offline.html');
+    } else if (response.status === 404) {
+      return caches.match('pages/404.html');
+    }
+    return response;
+  });
+});
