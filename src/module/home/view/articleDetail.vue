@@ -1,12 +1,10 @@
 <template>
   <panel class="home">
-    <myHeader slot="header" title="文章列表"></myHeader>
+    <myHeader slot="header" title="详情"></myHeader>
     <!-- <img alt="Vue logo" src="@/assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <main slot="main">
-      <list-item @click.native="clickItem(item)" v-for="(item, index) in article" :key="index" :summary="item.arSubheading">
-        <img :src="item.arImg" alt="" slot="left">
-      </list-item>
+      <div v-html="html" class="articleDetail"></div>
     </main>
     <my-nav slot="footer"></my-nav>
   </panel>
@@ -24,7 +22,7 @@ export default {
   name: 'home',
   data() {
     return {
-      article: [],
+      html: '',
     }
   },
   components: {
@@ -37,15 +35,17 @@ export default {
   methods: {
     clickItem(item) {
       console.log('click......', item);
-      this.$router.push(`/describe/${item.arId}`);
     }
   },
   created() {
-    fetch('http://huidoo.com.cn:9000/blogAdmin/blogUI/queryArticle.action', {
-    }).then((res) => res.json()).then(res => {
-      console.log(res);
-      this.article = res[0].data;
-    })
+    fetch(`http://huidoo.com.cn:9000/blogAdmin/blogUI/queryArticle.action?arId=${this.$route.params.arId}`).then(res => res.json()).then(res => {
+      this.html = res[0].data[0].arContent;
+    });
   }
 }
 </script>
+<style lang="stylus">
+.articleDetail
+  text-align left
+  padding 10px;
+</style>

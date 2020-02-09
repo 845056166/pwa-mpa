@@ -2,38 +2,34 @@
   <nav class="nav">
     <ul>
         <router-link to='/'>
+            <span class="icon">&#xe625;</span>
             <span>文章</span>
-            <img src="" alt="">
         </router-link>
-        <router-link to='/source'>
+        <router-link to='source'>
+            <span class="icon">&#xe888;</span>
             <span>资源</span>
-            <img src="" alt="">
         </router-link>
         <router-link to='note'>
+            <span class="icon">&#xe7d0;</span>
             <span>笔记</span>
-            <img src="" alt="">
         </router-link>
     </ul>
   </nav>
 </template>
 <script>
 export default {
-  name: 'nav',
+  name: 'mynav',
   data() {
     return {
 
     }
   },
   created() {
-    
   }
 }
 </script>
 <style lang="stylus">
 .nav 
-  position fixed;
-  bottom 0;
-  width 100%;
   ul
     width 100%;
     display flex;
@@ -43,6 +39,10 @@ export default {
       padding 1rem
       &.router-link-exact-active
         color: green
+      span.icon
+        display block
+        font-family iconfont
+      
 
 
 </style>

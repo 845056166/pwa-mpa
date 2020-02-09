@@ -182,7 +182,6 @@ hgroup,
 nav,
 section,
 summary {
-    display: block;
 }
  
 @media screen and (min-width:100px){ /*  iPhone 4,5 */
